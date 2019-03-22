@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <a href="/">Go Home</a>
+    <hr />
+    <ul>
+      <% for(let i = 0; i < jokes.length; i++){ %>
+      <li><%= jokes[i] %></li>
+      <% } %>
+    </ul>
+    <hr />
+  </body>
+</html>
