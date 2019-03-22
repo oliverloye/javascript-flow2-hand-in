@@ -42,8 +42,9 @@ NoSQL, MongoDB and Mongoose
 
 - Explain reasons to add a layer like Mongoose, on top on of a schema-less database like MongoDB
 
+
 These two topics will be introduced in period-3
--
+
       - Explain about indexes in MongoDB, how to create them, and demonstrate how you have used them.
       - Explain, using your own code examples, how you have used some of MongoDB's "special" indexes like TTL and 2dsphere
 
