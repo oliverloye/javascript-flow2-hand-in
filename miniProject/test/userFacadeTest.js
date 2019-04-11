@@ -6,52 +6,32 @@ dbConnect(require('../settings').TEST_DB_URI);
 
 const User = require('../models/user');
 const userFacade = require('../facades/userFacade');
+const makeTestData = require('../makeTestUsers');
 
 describe('Testing userFacade', function () {
 
     before(async function () {
         // Removes all Users to test it again
-        await User.deleteMany({});
-
-        await userFacade.addUser(
-            "username",
-            "password",
-            "firstname",
-            "lastname",
-            "testEmail@email.dk"
-        );
-        await userFacade.addUser(
-            "username2",
-            "password2",
-            "firstname2",
-            "lastname2",
-            "testEmail@email.dk2"
-        );
-        await userFacade.addUser(
-            "username3",
-            "password3",
-            "firstname3",
-            "lastname3",
-            "testEmail@email.dk3"
-        );
+        await userFacade.deleteAllUsers();
+        await makeTestData();
     });
 
     it('Test if the User is in the DB', async function () {
-        var user = await User.find({firstName: "firstname"});
-        expect(user[0].lastName).to.be.equal("lastname", "Check for lastname");
-        expect(user[0].email).to.be.equal('testEmail@email.dk', "check for email");
+        var user = await User.find({firstName: "Olle"});
+        expect(user[0].lastName).to.be.equal("Bolle", "Check for lastname");
+        expect(user[0].email).to.be.equal('olle@bolle.dk', "check for email");
     });
 
     it("Test if you can get all Users", async function () {
         var users = await userFacade.getAllUsers();
-        expect(users[0].firstName).to.be.equal("firstname");
-        expect(users[1].firstName).to.be.equal("firstname2");
-        expect(users[2].firstName).to.be.equal("firstname3");
+        expect(users[0].firstName).to.be.equal("Olle");
+        expect(users[1].firstName).to.be.equal("BOlle");
+        expect(users[2].firstName).to.be.equal("COlle");
     });
 
     it("Test if you can find User by username", async function () {
-        var user = await userFacade.findByUsername("username2");
-        expect(user[0].firstName).to.be.equal("firstname2");
+        var user = await userFacade.findByUsername("test2");
+        expect(user[0].firstName).to.be.equal("BOlle");
     });
 
     it("Test if you can add a new user", async function () {

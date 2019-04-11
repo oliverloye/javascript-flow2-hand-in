@@ -10,8 +10,8 @@ async function addUser(username, password, firstName = 'undefined', lastName = "
         email: [email],
         created
     });
-    return user;
     await user.save();
+    return user;
 }
 
 
@@ -25,4 +25,20 @@ async function findByUsername(username) {
     });
 }
 
-module.exports = {addUser, getAllUsers, findByUsername};
+async function deleteAllUsers() {
+    return await User.deleteMany();
+}
+
+async function deleteUser(username) {
+    return await User.deleteOne({
+        "username": username
+    });
+}
+
+module.exports = {
+    addUser: addUser,
+    getAllUsers: getAllUsers,
+    findByUsername: findByUsername,
+    deleteAllUsers: deleteAllUsers,
+    deleteUser: deleteUser
+};

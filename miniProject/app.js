@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const PORT = 22444;
 
 var connect = require("./dbConnect");
 connect(require("./settings").DEV_DB_URI);
@@ -39,6 +40,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server started, listening on: ${PORT}`);
 });
 
 module.exports = app;
