@@ -13,5 +13,6 @@ async function addPosition(long, lat, userId) {
 }
 
 module.exports = {
-    getPosition: getPosition
+    getPosition: getPosition,
+    addPosition: addPosition
 };

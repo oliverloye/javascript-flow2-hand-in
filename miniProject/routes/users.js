@@ -8,12 +8,14 @@ router.get('/all', async function (req, res, next) {
     var users = await userFacade.getAllUsers();
 
     res.json(users);
+    next();
 });
 
 router.get('/:username', async function (req, res, next) {
     var username = req.params.username;
     var user = await userFacade.findByUsername(username);
     res.json(user);
+    next();
 });
 
 router.post('/add', async function (req, res, next) {
@@ -33,6 +35,7 @@ router.post('/add', async function (req, res, next) {
     // returns the user
     console.log(user);
     res.json(user);
+    next();
 });
 
 module.exports = router;
