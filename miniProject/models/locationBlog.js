@@ -1,5 +1,5 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 var LocationBlogSchema = new Schema({
     created: {type: Date, default: Date.now(), required: true},
@@ -14,10 +14,10 @@ var LocationBlogSchema = new Schema({
     //author: {type: Schema.ObjectId, }
     author: {type: Schema.Types.ObjectId, ref: "User", required: true},
     //likedBy: [Schema.Types.ObjectId]
-    likedBy: {type: [Schema.Types.ObjectId], ref: "User"}
+    likedBy: [{type: [Schema.Types.ObjectId], ref: "User"}]
 });
 
-LocationBlogSchema.virtual("likedByCount").get(function() {
+LocationBlogSchema.virtual("likedByCount").get(function () {
     return this.likedBy.length;
 });
 
@@ -26,7 +26,7 @@ LocationBlogSchema.pre("update", function (next) {
     next();
 });
 
-var LocationBlog = mongoose.model("LocationBlog", LocationBlogSchema);
+const LocationBlog = mongoose.model("LocationBlog", LocationBlogSchema);
 
 module.exports = LocationBlog;
 

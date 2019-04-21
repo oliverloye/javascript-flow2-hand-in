@@ -79,14 +79,31 @@ async function makeData() {
         await LocationBlog.deleteMany({});
 
         var users = await User.insertMany(myUsers);
-        var newUser = new User({username: "d", password: "test", firstName: "Dolly", lastName: "Parton", email: "dolly@parton.com"});
+        var newUser = new User({
+            username: "d",
+            password: "test",
+            firstName: "Dolly",
+            lastName: "Parton",
+            email: "dolly@parton.com"
+        });
         await newUser.save();
         console.log(users);
 
-        var positions = [positionCreator(10, 11, users[0]._id), positionCreator(11, 12, users[1]._id, true)
-        ]
+        var positions = [
+            positionCreator(10, 11, users[0]._id),
+            positionCreator(11, 12, users[1]._id, true)
+        ];
+
+
+        var blogs = [
+            {
+                info: "Cool Place",
+                pos: {longitude: 26, latitude: 57},
+                author: users[0]._id
+            }
+        ];
+
         await Position.insertMany(positions);
-        var blogs = [{info: "Cool Place", pos: {longitude: 26, latitude: 57}, author: users[0]._id}]
         await LocationBlog.insertMany(blogs);
 
     } catch (err) {
