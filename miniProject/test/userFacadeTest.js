@@ -6,14 +6,14 @@ dbConnect(require('../settings').TEST_DB_URI);
 
 const User = require('../models/user');
 const userFacade = require('../facades/userFacade');
-const makeTestData = require('../makeTestUsers');
+const testData = require('../makeTestUsers');
 
 describe('Testing userFacade', function () {
 
     before(async function () {
         // Removes all Users to test it again
         await userFacade.deleteAllUsers();
-        await makeTestData();
+        await testData.makeTestData();
     });
 
     it('Test if the User is in the DB', async function () {
@@ -47,10 +47,11 @@ describe('Testing userFacade', function () {
 
     });
 
-    after(function () {
+    after(async function () {
         // at the end of the test do something...
         // dbConnect.prototype.close
         //dbConnect.connection.close()
+        await mongoose.disconnect();
     });
 
 });

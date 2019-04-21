@@ -2,10 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 var LocationBlogSchema = new Schema({
-    created: {type: Date, default: Date.now(), required: true},
+    created: {type: Date, default: Date.now()},
     lastUpdated: Date,
-    info: String,
-    slug: String,
+    info: { type: String, required: true },
     img: String,
     pos: {
         longitude: {type: Number, required: true},
@@ -14,7 +13,7 @@ var LocationBlogSchema = new Schema({
     //author: {type: Schema.ObjectId, }
     author: {type: Schema.Types.ObjectId, ref: "User", required: true},
     //likedBy: [Schema.Types.ObjectId]
-    likedBy: [{type: [Schema.Types.ObjectId], ref: "User"}]
+    likedBy: [{type: Schema.Types.ObjectId, ref: "User"}]
 });
 
 LocationBlogSchema.virtual("likedByCount").get(function () {

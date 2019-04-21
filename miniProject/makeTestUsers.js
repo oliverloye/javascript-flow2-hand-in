@@ -96,4 +96,4 @@ async function makeTestData() {
 
 makeTestData();
 
-module.exports = makeTestData;
+module.exports = {makeTestData: makeTestData};

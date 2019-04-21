@@ -4,6 +4,7 @@ const connect = require('../dbConnect.js');
 const db_con = require('../settings').TEST_DB_URI;
 const User = require('../models/user');
 const LocationBlog = require('../models/locationBlog');
+const testData = require('../makeTestUsers');
 
 const blogFacade = require('../facades/blogFacade');
 const userFacade = require('../facades/userFacade');
@@ -16,6 +17,7 @@ describe('Testing the blogFacade', function() {
     before(async function() {
         //this.timeout(require("../settings").MOCHA_TEST_TIMEOUT);
         await connect(db_con);
+        //testData.makeTestData();
     });
 
     var locationBlogs = [];
@@ -40,9 +42,9 @@ describe('Testing the blogFacade', function() {
         ]);
     });
 
-    it('Should find all locationblogs (place 1 & place 2)', async function() {
+    it('Should find all locationblogs (place 1 and place 2)', async function() {
         var locationBlogs = await blogFacade.getAllLocationBlogs();
-        expect(locationBlogs.length).to.be.equal(2);
+        expect(locationBlogs.length).to.be.equal(3);
     });
 
     it('Should find place 1 by id', async function() {
@@ -68,7 +70,7 @@ describe('Testing the blogFacade', function() {
         expect(locationBlogs.length).to.be.equal(3);
     });
 
-    it('Should like place 2 for Kurt Wonnegut', async function() {
+    it('Should like place 2 for user, test1', async function() {
         var locationBlogs = await blogFacade.getAllLocationBlogs();
         var locationBlog = await blogFacade.findById(locationBlogs[1]._id);
         expect(locationBlog.likedBy).to.be.empty;
@@ -77,7 +79,7 @@ describe('Testing the blogFacade', function() {
             users[0]._id
         );
         expect(locationBlog).to.not.be.null;
-        expect(locationBlog.info).to.be.equal('Cool Place2');
+        expect(locationBlog.info).to.be.equal('place 2');
         expect(locationBlogs.length).to.be.equal(2);
         expect(locationBlog.likedBy).to.be.contains(users[0]._id);
     });

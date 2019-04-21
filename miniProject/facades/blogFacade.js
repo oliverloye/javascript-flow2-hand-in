@@ -1,9 +1,8 @@
 const LocationBlog = require('../models/locationBlog');
 
-async function addLocationBlog(info, slug, img, pos, author, likedByUserID) {
+async function addLocationBlog(info, img, pos, author, likedByUserID) {
     var blog = new LocationBlog({
         info,
-        slug,
         img,
         pos,
         author,
