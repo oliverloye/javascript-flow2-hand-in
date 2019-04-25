@@ -16,10 +16,11 @@ describe('Testing userFacade', function () {
         await testData.makeTestData();
     });
 
-    it('Test if the User is in the DB', async function () {
+    it('Test if the User is in the DB', async function(done) {
         var user = await User.find({firstName: "Olle"});
         expect(user[0].lastName).to.be.equal("Bolle", "Check for lastname");
         expect(user[0].email).to.be.equal('olle@bolle.dk', "check for email");
+        done();
     });
 
     it("Test if you can get all Users", async function () {

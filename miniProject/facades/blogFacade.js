@@ -2,18 +2,20 @@ const LocationBlog = require('../models/locationBlog');
 
 async function addLocationBlog(info, img, pos, author, likedByUserID) {
     var blog = new LocationBlog({
-        info,
-        img,
-        pos,
-        author,
-        likedByUserID
+        info: info,
+        img: img,
+        pos: pos,
+        author: author,
+        likedByUserID: likedByUserID
     });
     await blog.save();
+    return blog;
 
 }
 
 async function getAllLocationBlogs() {
-    return await LocationBlog.find({}).exec();
+    var allBlogs = await LocationBlog.find({});
+    return allBlogs;
 }
 
 async function findByInfo(info) {
