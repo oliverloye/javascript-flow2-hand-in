@@ -15,6 +15,8 @@ describe('Testing the blogFacade', function () {
         await connect(db_con);
         await userFacade.deleteAllUsers();
         await testData.makeTestData();
+        await LocationBlog.deleteMany({});
+
     });
 
     var locationBlogs = [];

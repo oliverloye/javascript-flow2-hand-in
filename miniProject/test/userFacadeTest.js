@@ -12,15 +12,14 @@ describe('Testing userFacade', function () {
 
     before(async function () {
         // Removes all Users to test it again
-        await userFacade.deleteAllUsers();
+        //await userFacade.deleteAllUsers();
         await testData.makeTestData();
     });
 
-    it('Test if the User is in the DB', async function(done) {
-        var user = await User.find({firstName: "Olle"});
+    it('Test if the User is in the DB', async function() {
+        var user = await userFacade.findByUsername("test1");
         expect(user[0].lastName).to.be.equal("Bolle", "Check for lastname");
         expect(user[0].email).to.be.equal('olle@bolle.dk', "check for email");
-        done();
     });
 
     it("Test if you can get all Users", async function () {
